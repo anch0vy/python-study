@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Python-study : python study">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Python-study</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/anch0vy/python-study">View on GitHub</a>
+
+          <h1 id="project_title">Python-study</h1>
+          <h2 id="project_tagline">python study</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/anch0vy/python-study/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/anch0vy/python-study/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="python" class="anchor" href="#python" aria-hidden="true"><span class="octicon octicon-link"></span></a>python</h1>
+
+<p>개인적으로 공부한 내용을 바탕으로 작성한 문서입니다.(<a href="https://docs.python.org/2/contents.html">참고한곳</a>)</p>
+
+<p>내용은 파이썬에 대한 여러가지 잡다한 설명과 코드가 될것같네요.</p>
+
+<p>python 2를 기준으로 설명하고, 어느정도 파이썬에 대해 지식이 있는 사람을 대상으로 해요.</p>
+
+<p>전부 설명하는건 아니고 쓸만한것이고 누군가는 모를 수 있는것만 설명해요.</p>
+
+<p>("꽝, 다음기회에" 라 써져있는부분은 아직 작성하지 않은 부분입니다)</p>
+
+<h2>
+<a id="python2-vs-python3" class="anchor" href="#python2-vs-python3" aria-hidden="true"><span class="octicon octicon-link"></span></a>python2 vs python3</h2>
+
+<p>파이썬3이 나온건 2008년인데요, 아직까지 파이썬2가 쓰이는 이유는 참 많습니다.</p>
+
+<ul>
+<li>지원 라이브러리 많음</li>
+<li>python2의 지원기간의 연장</li>
+<li>python3의 기능들 몇몇이 python2로 내려옴</li>
+</ul>
+
+<p>특히 python2의 지원기간 연장은 충격적이였는데요, 원래 2014년을 끝으로 지원이 끝날 예정이였으나(<a href="https://hg.python.org/peps/rev/76d43e52d978">참고</a>)이게 2020년까지 연장이 되었습니다.
+다만 python 2.8은 나오지 않는다고 했기때문에 기능추가보단 버그수정이 주가 될것 같습니다. (<a href="https://www.python.org/dev/peps/pep-0404/#id10">참고</a>)
+참고로 현재 최신버전은 2.7.9입니다.</p>
+
+<p>파이썬 2와 3의 기능적 차이점은 여러가지가 있지만 이정도만 아시면 될것같습니다</p>
+
+<ul>
+<li>python2가 unicode가 str처럼 작동</li>
+<li>print의 함수화</li>
+<li>long 삭제(전부 int로 처리)</li>
+<li>나눗셈(/) 가 항상 float를 리턴</li>
+<li>python2의 raw_input이 3의 input이 됨</li>
+</ul>
+
+<p>여기서 long의 삭제는 숫자연산이 많은 프로그램의 성능을 악화(약간)시키는 원인이 되기도 했습니다.</p>
+
+<p>이것외에도 많은 차이가 있는데 자세한건 검색을...</p>
+
+<h2>
+<a id="pip-설치" class="anchor" href="#pip-%EC%84%A4%EC%B9%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>pip 설치</h2>
+
+<p><a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a> 를 받아서 커맨드창이나 콘솔에서 실행하면 되요.</p>
+
+<p>윈도우 유져이고, 사용자명에 한글이 들어가는 경우 안될수 있는데 이럴때에는 TEMP와 TMP 환경변수를 한글이 없는 적당한 폴더로 설정하시면 잘 됩니다.</p>
+
+<h2>
+<a id="소스코드-인코딩" class="anchor" href="#%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C-%EC%9D%B8%EC%BD%94%EB%94%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>소스코드 인코딩</h2>
+
+<div class="highlight highlight-python"><pre><span class="pl-c"># -*- coding: encoding -*-</span>
+<span class="pl-c"># -*- coding: utf-8 -*-</span></pre></div>
+
+<p>코드내에 한글이 있으면 꼭 써줘야 해요.</p>
+
+<h2>
+<a id="제어문" class="anchor" href="#%EC%A0%9C%EC%96%B4%EB%AC%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>제어문</h2>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">for</span> some <span class="pl-k">in</span> iterable_something:
+    <span class="pl-c">#do something</span>
+
+<span class="pl-k">for</span> some1,some2 <span class="pl-k">in</span> iterable_something:
+    <span class="pl-c">#do something</span>
+
+<span class="pl-k">if</span> something:
+    <span class="pl-c">#do  something</span>
+
+<span class="pl-k">while</span> something:
+    <span class="pl-c">#do something</span>
+<span class="pl-k">else</span>:
+    <span class="pl-c">#do something</span>
+</pre></div>
+
+<p>break는 for,while에서 사용 가능해요.</p>
+
+<p>반복문 내에서 호출된 함수내부에서는 사용 불가능(문법상의 문제)</p>
+
+<p>continue는 그 이후 코드를 실행하지 않고 바로 다음 루프로 이동</p>
+
+<h2>
+<a id="함수" class="anchor" href="#%ED%95%A8%EC%88%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>함수</h2>
+
+<div class="highlight highlight-python"><pre><span class="pl-st">def</span> <span class="pl-en">test</span>(<span class="pl-vpf">arg1</span>,<span class="pl-vpf">arg2</span>,<span class="pl-vpf">arg3</span><span class="pl-k">=</span><span class="pl-c1">3</span>):
+    <span class="pl-c">#do something with arg1,arg2,arg3....</span>
+
+test(arg1,arg2) <span class="pl-c">#arg3에는 3이 들어감,기본값 지정이 된 인자는 생략 가능</span>
+test(<span class="pl-vpf">arg2</span><span class="pl-k">=</span>some1, <span class="pl-vpf">arg1</span><span class="pl-k">=</span>some2) <span class="pl-c">#인자명을 지정해서 써줄수 있음</span>
+
+<span class="pl-st">def</span> <span class="pl-en">bad_test</span>(<span class="pl-vpf">arg1</span><span class="pl-k">=</span>[]):<span class="pl-c">#안좋은 방식</span>
+    arg1.append(<span class="pl-c1">1</span>)
+    <span class="pl-k">print</span> arg1
+
+test()<span class="pl-c">#[1]</span>
+test()<span class="pl-c">#[1,1]</span>
+test()<span class="pl-c">#[1,1,1]</span>
+
+<span class="pl-st">def</span> <span class="pl-en">good_test</span>(<span class="pl-vpf">arg1</span><span class="pl-k">=</span><span class="pl-c1">None</span>):<span class="pl-c">#좋은 방식</span>
+    <span class="pl-k">if</span> arg1<span class="pl-k">==</span><span class="pl-c1">None</span>:
+        arg1<span class="pl-k">=</span>[]
+    arg1.append(<span class="pl-c1">1</span>)
+    <span class="pl-k">print</span> arg1
+
+<span class="pl-st">def</span> <span class="pl-en">test</span>(*<span class="pl-vpf">l</span>):
+    <span class="pl-k">print</span> <span class="pl-s3">type</span>(l),l
+test(<span class="pl-c1">1</span>,<span class="pl-c1">2</span>,<span class="pl-c1">3</span>)<span class="pl-c">#&lt;type 'tuple'&gt; (1, 2, 3)</span>
+
+<span class="pl-st">def</span> <span class="pl-en">test</span>(**<span class="pl-vpf">d</span>):
+    <span class="pl-k">print</span> <span class="pl-s3">type</span>(d),d
+test(<span class="pl-vpf">a</span><span class="pl-k">=</span><span class="pl-c1">1</span>,<span class="pl-vpf">b</span><span class="pl-k">=</span><span class="pl-c1">2</span>)<span class="pl-c">#&lt;type 'dict'&gt; {'a': 1, 'b': 2}</span>
+
+<span class="pl-st">def</span> <span class="pl-en">test</span>():
+    <span class="pl-s1"><span class="pl-pds">'''</span>이건 함수 설명 문자열이에요<span class="pl-pds">'''</span></span>
+    <span class="pl-k">pass</span>
+test.<span class="pl-sv">__doc__</span><span class="pl-c">#'이건 함수 설명 문자열이에요'</span></pre></div>
+
+<h2>
+<a id="색다른-함수호출방법" class="anchor" href="#%EC%83%89%EB%8B%A4%EB%A5%B8-%ED%95%A8%EC%88%98%ED%98%B8%EC%B6%9C%EB%B0%A9%EB%B2%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>색다른 함수호출방법</h2>
+
+<div class="highlight highlight-python"><pre>d<span class="pl-k">=</span>[<span class="pl-c1">1</span>,<span class="pl-c1">10</span>,<span class="pl-c1">3</span>]
+<span class="pl-s3">range</span>(d)<span class="pl-c">#error</span>
+<span class="pl-s3">range</span>(<span class="pl-k">*</span>d)<span class="pl-c">#[1, 3, 5, 7, 9] =range(1,10,3)</span>
+
+d<span class="pl-k">=</span>{}
+d[<span class="pl-s1"><span class="pl-pds">'</span>arg1<span class="pl-pds">'</span></span>]<span class="pl-k">=</span><span class="pl-c1">1</span>
+d[<span class="pl-s1"><span class="pl-pds">'</span>arg2<span class="pl-pds">'</span></span>]<span class="pl-k">=</span><span class="pl-c1">2</span>
+some_function(<span class="pl-k">*</span>d)<span class="pl-c">#== some_function(arg1=1,arg2=2)</span></pre></div>
+
+<h2>
+<a id="list" class="anchor" href="#list" aria-hidden="true"><span class="octicon octicon-link"></span></a>list</h2>
+
+<h3>
+<a id="method" class="anchor" href="#method" aria-hidden="true"><span class="octicon octicon-link"></span></a>method</h3>
+
+<ul>
+<li>
+<p>append(v)</p>
+
+<p>리스트 마지막에 추가한다.</p>
+</li>
+<li>
+<p>index(v[,start[,stop]])</p>
+
+<p>start부터 stop사이에 v를 찾아서 첫번째 위치를 리턴.
+발견 못할시 ValueError 예외가 일어남.</p>
+</li>
+<li>
+<p>remove(v)</p>
+
+<p>v를 '한'개 지움</p>
+</li>
+<li>
+<p>sort(cmp=None, key=None, reverse=False)</p>
+
+<p>내부적으로는 sorted함수 사용</p>
+
+<p>l.sort() -&gt; l=sorted(l)</p>
+
+<p>cmp와 key인자로 커스텀화 가능</p>
+</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>l<span class="pl-k">=</span>[[<span class="pl-c1">1</span>,<span class="pl-c1">2</span>],[<span class="pl-c1">2</span>,<span class="pl-c1">1</span>],[<span class="pl-c1">9</span>,<span class="pl-c1">4</span>],[<span class="pl-c1">5</span>,<span class="pl-c1">5</span>]]
+l.sort(<span class="pl-vpf">key</span><span class="pl-k">=</span><span class="pl-st">lambda</span> <span class="pl-vpf">x</span>:x[<span class="pl-c1">1</span>]) <span class="pl-c">#x[1]을 비교하는 키로 사용</span>
+<span class="pl-c">#[[2, 1], [1, 2], [9, 4], [5, 5]]</span>
+
+l.sort(<span class="pl-vpf">cmp</span><span class="pl-k">=</span><span class="pl-st">lambda</span> <span class="pl-vpf">x</span>,<span class="pl-vpf">y</span>:<span class="pl-s3">cmp</span>(x[<span class="pl-c1">1</span>],y[<span class="pl-c1">1</span>]))<span class="pl-c">#비교함수를 설정함, 인자는 2개 받고 리턴값은 1,0,-1</span>
+<span class="pl-c">#[[2, 1], [1, 2], [9, 4], [5, 5]]</span></pre></div>
+
+<h2>
+<a id="tuple" class="anchor" href="#tuple" aria-hidden="true"><span class="octicon octicon-link"></span></a>tuple</h2>
+
+<p>수정안되는 list같은거</p>
+
+<p>길이가 1짜리 tuple만드는법(가끔 tuple형만을 원하는 함수가 있음 ex. sqlite3의 execute함수)</p>
+
+<div class="highlight highlight-python"><pre>t<span class="pl-k">=</span><span class="pl-c1">1</span>,
+t<span class="pl-k">=</span>(<span class="pl-c1">1</span>,)</pre></div>
+
+<h2>
+<a id="set" class="anchor" href="#set" aria-hidden="true"><span class="octicon octicon-link"></span></a>set</h2>
+
+<p>집합</p>
+
+<p>가장 큰 특징으로는 중복이 안된다는것</p>
+
+<div class="highlight highlight-python"><pre>a<span class="pl-k">=</span><span class="pl-s3">set</span>([<span class="pl-c1">1</span>,<span class="pl-c1">2</span>])
+b<span class="pl-k">=</span>seet([<span class="pl-c1">2</span>,<span class="pl-c1">3</span>])
+a<span class="pl-k">-</span>b<span class="pl-c"># 1</span>
+a<span class="pl-k">+</span>b<span class="pl-c"># error</span>
+a<span class="pl-k">&amp;</span>b<span class="pl-c"># 2</span>
+a<span class="pl-k">|</span>b<span class="pl-c"># 1,2,3</span>
+
+a.add(<span class="pl-c1">1</span>)<span class="pl-c">#1,2 에러가 나질 않는다!</span>
+a.add(<span class="pl-c1">3</span>)<span class="pl-c">#1,2,3</span></pre></div>
+
+<h2>
+<a id="dictionary" class="anchor" href="#dictionary" aria-hidden="true"><span class="octicon octicon-link"></span></a>dictionary</h2>
+
+<p>key-value 구조를 가지고 있고 순서가 없는 데이터형</p>
+
+<p>잘쓰면 편함</p>
+
+<div class="highlight highlight-python"><pre>a<span class="pl-k">=</span>{}
+b<span class="pl-k">=</span>{<span class="pl-c1">1</span>:<span class="pl-c1">1</span>,<span class="pl-s1"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>:<span class="pl-s1"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>}
+a[<span class="pl-c1">1</span>]<span class="pl-k">=</span><span class="pl-c1">1</span>
+a[<span class="pl-s1"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>]<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span></pre></div>
+
+<h3>
+<a id="method-1" class="anchor" href="#method-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>method</h3>
+
+<ul>
+<li>
+<p>items()</p>
+
+<p>(key,value)형태를 가진 리스트 리턴</p>
+</li>
+<li>
+<p>iteritems</p>
+
+<p>items()의 itemiterator 버전</p>
+</li>
+<li>
+<p>values(),keys()</p>
+
+<p>각각 value만,key만 리스트로 리턴</p>
+</li>
+</ul>
+
+<h2>
+<a id="import" class="anchor" href="#import" aria-hidden="true"><span class="octicon octicon-link"></span></a>import</h2>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> test
+<span class="pl-c">#같은 폴더의 test.py나 test.pyc 가 존재하면 임포트</span>
+<span class="pl-c">#test가 폴더면 그 안에있는 __init__.py를 임포트</span>
+<span class="pl-c">#그 외에는 sys.path 에서 임포트 site-package라든가 libs라든가 등등..</span>
+<span class="pl-c">#자기자신도 임포트 가능... 어디다 쓰지?</span>
+
+<span class="pl-k">import</span> test <span class="pl-k">as</span> t <span class="pl-c"># test를 이름 t로 임포트</span>
+<span class="pl-k">from</span> test <span class="pl-k">import</span> test <span class="pl-c">#test.py에서 test란것을 임포트</span>
+<span class="pl-k">from</span> test <span class="pl-k">import</span> <span class="pl-k">*</span> <span class="pl-c">#test.py에서 모든걸 임포트 별로 않좋은 방식</span>
+<span class="pl-k">from</span> test.test1 <span class="pl-k">import</span> test2 <span class="pl-c">#test폴더에서 test1폴더에 있는 test2를 임포트</span></pre></div>
+
+<p>참고로 __all__=[a,b,c]가 있다면 import * 해도 a,b,c만 임포트가 됨</p>
+
+<p>패키지에서는 이런식의 import도 가능하다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> . <span class="pl-k">import</span> at_same_folder
+<span class="pl-k">from</span> .. <span class="pl-k">import</span> at_parents_folder
+<span class="pl-k">from</span> ..at_parents_folder <span class="pl-k">import</span> my_parents_another_son</pre></div>
+
+<p><a href="https://docs.python.org/2/tutorial/modules.html#intra-package-references%5D">여길</a> 참고하자</p>
+
+<h2>
+<a id="문자열과-" class="anchor" href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EA%B3%BC-" aria-hidden="true"><span class="octicon octicon-link"></span></a>문자열과 %</h2>
+
+<p>C언어의 printf와 거의 비슷한 사용법을 가진다</p>
+
+<div class="highlight highlight-python"><pre>a<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">'</span>test <span class="pl-c1">%s</span><span class="pl-pds">'</span></span><span class="pl-k">%</span><span class="pl-s1"><span class="pl-pds">'</span>hehe<span class="pl-pds">'</span></span><span class="pl-c">#test hehe</span>
+a<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">'</span><span class="pl-c1">%s</span> <span class="pl-c1">%s</span><span class="pl-pds">'</span></span><span class="pl-k">%</span>(<span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>hehe<span class="pl-pds">'</span></span>)<span class="pl-c">#test hehe</span></pre></div>
+
+<p>특이한 포맷은 %r 이 있는데 이건 repr(v)한 결과를 문자열로 붙여놓는다</p>
+
+<h2>
+<a id="예외" class="anchor" href="#%EC%98%88%EC%99%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>예외</h2>
+
+<p>예외처리는 다음과 같이 한다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">try</span>:
+    <span class="pl-c">#do something</span>
+
+<span class="pl-k">except</span> except_name_1 , e:
+    <span class="pl-k">print</span> e
+
+<span class="pl-k">except</span> except_name_2 , e:
+    <span class="pl-k">print</span> e
+
+<span class="pl-k">else</span>:
+    <span class="pl-c">#do something</span>
+
+<span class="pl-k">finally</span>:
+    <span class="pl-c">#do something</span></pre></div>
+
+<p>except는 예외가 일어났을때 실행되고, finally가 있을경우 생략 가능하다(???????)</p>
+
+<p>else는 예외가 안일어났을경우 실행되고, 생략 가능하다</p>
+
+<p>finally는 예외가 있든없든 항상 실행되고, 생략 가능하다.</p>
+
+<p>예외의 이름과 e라 되어있는 부분도 생략 가능하다.</p>
+
+<p>e라 되어있는건 예외에 대한 정보를 담는 변수가 된다. 이건 그냥 print하면 'name 'ab' is not defined' 이런식으로 간단한 정보만 나온다. 좀더 자세한 예외 정보를 원한다면 라이브러리를 써야한다.</p>
+
+<p>idle에서 보는 형태의 예외정보를 보려면 간단하게 다음처럼 하면 된다(완전히 같진 않음)</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> traceback
+<span class="pl-k">try</span>:
+    noname()
+<span class="pl-k">except</span>:
+    traceback.print_exc()</pre></div>
+
+<p>또는 logging을 쓰는 방법도 있다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> logging
+<span class="pl-k">try</span>:
+    noname()
+<span class="pl-k">except</span>:
+    logging.exception(<span class="pl-s1"><span class="pl-pds">'</span>except!!!<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>예외를 강제로 일으키려면 raise 를 쓰면 된다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">raise</span> <span class="pl-s3">TypeError</span></pre></div>
+
+<p>위에서 언급했던 try...finally처럼 예외에서는 좀 특이한 동작이 몇가지 있다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-st">def</span> <span class="pl-en">life</span>():
+    <span class="pl-k">try</span>:
+        <span class="pl-k">return</span> <span class="pl-c1">42</span>
+    <span class="pl-k">finally</span>:
+        <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">'</span>egg<span class="pl-pds">'</span></span></pre></div>
+
+<p>life의 리턴값은 뭘까?</p>
+
+<p>궁금하면 <a href="https://docs.python.org/2/reference/compound_stmts.html#the-try-statement">여길</a> 참고하자</p>
+
+<h2>
+<a id="class" class="anchor" href="#class" aria-hidden="true"><span class="octicon octicon-link"></span></a>class</h2>
+
+<p>꽝. 다음기회에</p>
+
+<h2>
+<a id="keyword" class="anchor" href="#keyword" aria-hidden="true"><span class="octicon octicon-link"></span></a>keyword</h2>
+
+<ul>
+<li>and</li>
+<li>del</li>
+<li>from</li>
+<li>not</li>
+<li>while</li>
+<li>as</li>
+<li>elif</li>
+<li>global</li>
+<li>or</li>
+<li>
+<p>with</p>
+
+<p>with A() as a: 와 같은 형태로 쓰인다(with A() as a, B() as b: 도 가능)</p>
+
+<p>특징은 이 구문이 끝남과 동시에 a가 사라진다는 것이다.
+그래서 with open('test','r") as f 와 같이 많이 쓰인다</p>
+</li>
+<li><p>assert</p></li>
+<li>pass</li>
+<li>yield</li>
+<li>break</li>
+<li>exec</li>
+<li>is</li>
+<li>lambda</li>
+</ul>
+
+<h2>
+<a id="built-in-function" class="anchor" href="#built-in-function" aria-hidden="true"><span class="octicon octicon-link"></span></a>built-in function</h2>
+
+<ul>
+<li>
+<p>abs(v)</p>
+
+<p>v의 절대값 리턴</p>
+</li>
+<li>
+<p>all(iter)</p>
+
+<p>iter의 값을 v라 했을때 모든 v에 대해 bool(v)가 True면 True리턴, 그외에는 전부 False</p>
+</li>
+<li>
+<p>any(iter)</p>
+
+<p>iter의 값을 v라 했을때 모든 v에 대해 bool(v)가 False면 False리턴, 그외에는 전부 True</p>
+</li>
+</ul>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">all</span>([<span class="pl-c1">1</span>,<span class="pl-c1">True</span>,<span class="pl-c1">None</span>])<span class="pl-c">#False</span>
+<span class="pl-s3">any</span>([<span class="pl-c1">1</span>,<span class="pl-c1">True</span>,<span class="pl-c1">None</span>])<span class="pl-c">#True</span></pre></div>
+
+<ul>
+<li>bytearray</li>
+<li>
+<p>chr(v)</p>
+
+<p>v를 ascii에 해당하는 문자열로 변경.</p>
+
+<p>그래서 v는 항상 0xff이하이다.</p>
+</li>
+<li>
+<p>dir(v)</p>
+
+<p>개인적으로 애용하는 함수.</p>
+
+<p>v.?의 ?에 올수있는것들을 리스트로 전부 출력한다.</p>
+
+<p>만약 v.<strong>dir</strong>함수가 존재하면 그 함수를 실행시킨다.</p>
+
+<p>dir()은 네임스페이스를 출력한다.</p>
+</li>
+<li>
+<p>enumerate(iter)</p>
+
+<div class="highlight highlight-python"><pre>l<span class="pl-k">=</span>[<span class="pl-s1"><span class="pl-pds">'</span>a<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>b<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>c<span class="pl-pds">'</span></span>]
+<span class="pl-k">for</span> n,c <span class="pl-k">in</span> <span class="pl-s3">enumerate</span>(l):
+  <span class="pl-k">print</span> n,c
+<span class="pl-c">#0,a</span>
+<span class="pl-c">#1,b</span>
+<span class="pl-c">#2,c</span></pre></div>
+</li>
+<li>
+<p>eval</p>
+
+<p>꽝, 다음기회에</p>
+</li>
+<li>
+<p>file(name[, mode[, buffering]]) 그리고 open(name[, mode[, buffering]])</p>
+
+<p>file은 type을 상속받은 class다.</p>
+
+<p>open은 함수다.</p>
+
+<p>그래서 다음과 같은 차이가 발생한다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">isinstance</span>(f,file)<span class="pl-c">#ok</span>
+<span class="pl-s3">isinstance</span>(f,<span class="pl-s3">open</span>)<span class="pl-c">#error</span></pre></div>
+</li>
+<li>
+<p>filter(function, iter)</p>
+
+<p>iter의 각 요소를 function에 인자로 넘겨서 True일경우 리스트에 추가해서 리턴한다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">filter</span>(<span class="pl-st">lambda</span> <span class="pl-vpf">x</span>:x<span class="pl-k">%</span><span class="pl-c1">2</span>,[<span class="pl-c1">1</span>,<span class="pl-c1">2</span>,<span class="pl-c1">3</span>,<span class="pl-c1">4</span>,<span class="pl-c1">5</span>])<span class="pl-c">#[1, 3, 5]</span></pre></div>
+</li>
+<li>
+<p>hash(v)</p>
+
+<p>안전한 해쉬함수가 아니니 절대 비밀번호 비교용으로 쓰지 말자</p>
+</li>
+<li>
+<p>help(v)</p>
+
+<p>__doc__을 읽어와 자동으로 help문서를 작성해서 출력해준다</p>
+</li>
+<li>
+<p>id(v)</p>
+
+<p>v의 고유한 id를 출력한다.</p>
+
+<p>참고로 id의 리턴값은 해당 v의 메모리 주소다.(cpython기준) 그래서 리스트같은건 같은값을 가지더라도 같은id를 가지지 않을 수 있다.</p>
+</li>
+<li>
+<p>input(s)</p>
+
+<p>python2에서는 eval(raw_input(s)) 와 같다</p>
+
+<p>python3에서는 python2의 raw_input과 같다</p>
+</li>
+<li>
+<p>int(v,base)</p>
+
+<p>문자열을 int로 바꾼다. base에는 진수가 들어간다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">int</span>(<span class="pl-s1"><span class="pl-pds">'</span>abc<span class="pl-pds">'</span></span>,<span class="pl-c1">16</span>)<span class="pl-c">#2748</span></pre></div>
+</li>
+<li>
+<p>isinstance(v,classinfo)</p>
+
+<p>v가 classinfo와 같은지 체크한다. classinfo에는 한개의 class나 여러개의 class가 튜플로 들어간다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">isinstance</span>(v,(<span class="pl-s3">unicode</span>,<span class="pl-s3">str</span>))<span class="pl-c">#v가 유니코드거나 문자열이면 True</span></pre></div>
+</li>
+<li>
+<p>map(func,iter)</p>
+
+<p>iter에서 하나씩 가져와서 func에 인자로 넘겨주고 그걸 다시 리스트로 만들어낸다. 예제를 보자</p>
+
+<div class="highlight highlight-python"><pre>a1<span class="pl-k">=</span><span class="pl-s3">raw_input</span>()<span class="pl-c">#hello 입력</span>
+a2<span class="pl-k">=</span><span class="pl-s3">map</span>(<span class="pl-s3">ord</span>,a1)
+<span class="pl-k">print</span> a1<span class="pl-c">#hello</span>
+<span class="pl-k">print</span> a2<span class="pl-c">#[104, 101, 108, 108, 111]</span></pre></div>
+
+<p>잘쓰면 짱짱이다.</p>
+</li>
+<li>
+<p>max(iter)</p>
+
+<p>iter중 최대값을 리턴한다.</p>
+</li>
+<li>
+<p>min(iter)</p>
+
+<p>iter중 최대값을 리턴한다.</p>
+</li>
+<li>
+<p>ord(v)</p>
+
+<p>한글자를 받아서 ascii값을 리턴한다.</p>
+</li>
+<li>
+<p>print(*objects, sep=' ', end='\n', file=sys.stdout)</p>
+
+<p>프린트한다. sep은 print(1,2,3)이렇게 호출했을때 1,2,3사이에 들어갈 문자열이다 </p>
+</li>
+<li>
+<p>exit,quit</p>
+
+<p>id값은 다르지만 같다</p>
+</li>
+<li>
+<p>range(start, stop[, step])</p>
+
+<p>start부터 stop까지 step만큼 건너뛰면서 리스트를 만든다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">range</span>(<span class="pl-c1">1</span>,<span class="pl-c1">10</span>,<span class="pl-c1">3</span>)<span class="pl-c">#[1, 4, 7]</span></pre></div>
+
+<p>동작 방식이 리스트를 만들고 리턴하는것이기 때문에 stop이 커지면 비효율적이다.</p>
+
+<p>가급적 xrange를 사용하자.(인자 같음)</p>
+</li>
+<li>
+<p>reload(m)</p>
+
+<p>이미 한번 로드된 모듈을 다시 로드한다. 개발중에 유용함.</p>
+</li>
+<li>
+<p>super</p>
+
+<p>꽝, 다음기회에</p>
+</li>
+<li>
+<p>unichr(v)</p>
+
+<p>chr과 비슷한 함수인데 다만 리턴이 유니코드다. 또한 v의 값 역시 0x10000까지다</p>
+</li>
+<li>
+<p>unicode</p>
+
+<p>한글관련 문제가 생길때 무조건 쓰게되는 함수</p>
+
+<p>별로 좋지 않은 코드지만 귀찮으면 이렇게 하면된다.</p>
+
+<div class="highlight highlight-python"><pre>my_unicode(some_str)
+<span class="pl-k">try</span>:
+  <span class="pl-k">return</span> <span class="pl-s3">unicode</span>(some_str,<span class="pl-s1"><span class="pl-pds">'</span>utf-8<span class="pl-pds">'</span></span>)
+<span class="pl-k">except</span>:
+  <span class="pl-k">return</span> <span class="pl-s3">unicode</span>(some_str,<span class="pl-s1"><span class="pl-pds">'</span>euc-kr<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>참고로 some_str은 str이여야한다. unicode면 둘다 에러남</p>
+</li>
+<li>
+<p>xrange</p>
+
+<p>range에서 설명한 그것.
+for문에서는 가급적 이걸쓰자</p>
+</li>
+<li>
+<p>zip</p>
+
+<p>2개 이상의 iterable한 애들을 묶어주는 함수다. for문같은 곳에서 유용하다.</p>
+
+<div class="highlight highlight-python"><pre>l1<span class="pl-k">=</span>[<span class="pl-c1">1</span>,<span class="pl-c1">2</span>,<span class="pl-c1">3</span>]
+l2<span class="pl-k">=</span>[<span class="pl-c1">4</span>,<span class="pl-c1">5</span>,<span class="pl-c1">6</span>]
+l<span class="pl-k">=</span><span class="pl-s3">zip</span>(l1,l2)<span class="pl-c">#[(1, 4), (2, 5), (3, 6)]</span>
+<span class="pl-k">for</span> v1,v2 <span class="pl-k">in</span> <span class="pl-s3">zip</span>(l1,l2):
+  <span class="pl-c">#do something...</span></pre></div>
+</li>
+</ul>
+
+<h2>
+<a id="file" class="anchor" href="#file" aria-hidden="true"><span class="octicon octicon-link"></span></a>file</h2>
+
+<p>파일입출력을 담당하는 클래스</p>
+
+<p>기본적인 내용은 pass</p>
+
+<p>readlines() 는 파일 전부를 한번에 읽어서 리스트로 만드는데, 메모리 효율상 별로 좋진 않다.</p>
+
+<p>그래서 만들어진게 xreadlines(). 한번에 파일을 읽지 않고 필요할때마다 파일을 읽어 리턴한다.</p>
+
+<p>하지만 이 함수들보단 이렇게 쓰는게 가독성면에서 좋다고 생각한다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">with</span> <span class="pl-s3">open</span>(<span class="pl-s1"><span class="pl-pds">'</span>README.md<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>r<span class="pl-pds">'</span></span>) <span class="pl-k">as</span> f:
+    <span class="pl-k">for</span> line <span class="pl-k">in</span> f:
+        <span class="pl-k">print</span> line</pre></div>
+
+<p>캬</p>
+
+<h2>
+<a id="import-string" class="anchor" href="#import-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>import string</h2>
+
+<p>꽝, 다음기회에</p>
+
+<h2>
+<a id="import-re" class="anchor" href="#import-re" aria-hidden="true"><span class="octicon octicon-link"></span></a>import re</h2>
+
+<p>어떤 특정한 문자와 문자 사이의 값을 뽑아내고 싶을때</p>
+
+<p>ex)<code>&lt;span id="sadfdsaf"&gt;{{여길뽑아내고싶다}}&lt;/span&gt;</code></p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> re
+a<span class="pl-k">=</span>re.findall(<span class="pl-s1"><span class="pl-pds">'</span>&lt;span id="sadfdsaf"&gt;?(.*?)&lt;/span&gt;<span class="pl-pds">'</span></span>,docu,re.DOTALL)</pre></div>
+
+<p>이러면 a에 뽑힌 리스트가 들어가있다.(정규식은 잘 몰라서 별로 좋지 못한 코드일 가능성이 높음)</p>
+
+<p>아직 작성할거 남음</p>
+
+<h2>
+<a id="import-struct" class="anchor" href="#import-struct" aria-hidden="true"><span class="octicon octicon-link"></span></a>import struct</h2>
+
+<p>pack과 unpack때문에 존재하는 모듈</p>
+
+<p>포맷팅 문자열은 <a href="https://docs.python.org/2/library/struct.html#format-characters">여기</a>를 참고하면 된다.</p>
+
+<p>대충 이런식으로 쓰인다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> struct
+<span class="pl-k">with</span> <span class="pl-s3">open</span>(<span class="pl-s1"><span class="pl-pds">'</span>test.exe<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>rb<span class="pl-pds">'</span></span>) <span class="pl-k">as</span> f:
+    fmtl<span class="pl-k">=</span>struct.calcsize(<span class="pl-s1"><span class="pl-pds">'</span>2s29HI<span class="pl-pds">'</span></span>)
+    fr<span class="pl-k">=</span>f.read(fmtl)
+    pe_dos_header<span class="pl-k">=</span>struct.unpack(<span class="pl-s1"><span class="pl-pds">'</span>2s29HI<span class="pl-pds">'</span></span>,fr)
+    <span class="pl-c">#do something....</span></pre></div>
+
+<p>clacsize는 포맷팅 문자열을 받아서 길이가 몇인지 리턴해주는 함수이다.</p>
+
+<h2>
+<a id="import-difflib" class="anchor" href="#import-difflib" aria-hidden="true"><span class="octicon octicon-link"></span></a>import difflib</h2>
+
+<p>꽝, 다음기회에</p>
+
+<h2>
+<a id="import-stringio" class="anchor" href="#import-stringio" aria-hidden="true"><span class="octicon octicon-link"></span></a>import StringIO</h2>
+
+<p>문자열을 파일이나 버퍼처럼 read()나 write()로 읽고 쓸수 있게 해주는 모듈이다. 처음엔 어디에 쓰이나 싶었던 모듈.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> StringIO
+<span class="pl-k">import</span> sys
+my_stringio<span class="pl-k">=</span>StringIO.StringIO()
+sys.stdout<span class="pl-k">=</span>my_stringio
+<span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>어쩌구저쩌구<span class="pl-pds">'</span></span><span class="pl-c">#화면에 출력이 되지않고 my_stringio에 들어가있다</span></pre></div>
+
+<p>또는 flask같은곳에서도 쓰일수있다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-c">#import 생략</span>
+ret<span class="pl-k">=</span>StringIO.StringIO()
+<span class="pl-c">#do something....</span>
+ret.write(<span class="pl-s1"><span class="pl-pds">'</span>&lt;br&gt;블라블라...<span class="pl-pds">'</span></span>)
+<span class="pl-c">#do somethging....</span>
+ret.write(<span class="pl-s1"><span class="pl-pds">'</span>&lt;div&gt;블라블라...<span class="pl-pds">'</span></span>)
+<span class="pl-c">#do something...</span>
+<span class="pl-k">return</span> ret.getvalue()</pre></div>
+
+<p>참고로 StringIO는 순수파이썬이고, C로 만들어진 cStringIO가 있는데 살짝 빠르다고 하다.</p>
+
+<h2>
+<a id="import-textwarp" class="anchor" href="#import-textwarp" aria-hidden="true"><span class="octicon octicon-link"></span></a>import textwarp</h2>
+
+<p>꽝, 다음기회에</p>
+
+<h2>
+<a id="import-codecs" class="anchor" href="#import-codecs" aria-hidden="true"><span class="octicon octicon-link"></span></a>import codecs</h2>
+
+<p>꽝, 다음기회에</p>
+
+<p>이 모듈을 쓰는일이 없었으면 좋겠다...</p>
+
+<p>재밌는 인코딩이 있어서 소개한다(임포트 필요 ㄴㄴ)</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>anch0vy<span class="pl-pds">'</span></span>.encode(<span class="pl-s1"><span class="pl-pds">'</span>rot13<span class="pl-pds">'</span></span>)<span class="pl-c">#napu0il</span>
+<span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>멸치<span class="pl-pds">'</span></span>.encode(<span class="pl-s1"><span class="pl-pds">'</span>base64<span class="pl-pds">'</span></span>)<span class="pl-c">#uOrEoQ==</span>
+<span class="pl-k">print</span> <span class="pl-s1"><span class="pl-st">u</span><span class="pl-pds">'</span>멸치<span class="pl-pds">'</span></span>.encode(<span class="pl-s1"><span class="pl-pds">'</span>idna<span class="pl-pds">'</span></span>)<span class="pl-c">#xn-- -6ba4rxa87z</span>
+<span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>멸치<span class="pl-pds">'</span></span>.encode(<span class="pl-s1"><span class="pl-pds">'</span>bz2<span class="pl-pds">'</span></span>)<span class="pl-c">#bz2는 압축의 종류중 하나다.</span>
+<span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>멸치<span class="pl-pds">'</span></span>.encode(<span class="pl-s1"><span class="pl-pds">'</span>zip<span class="pl-pds">'</span></span>)<span class="pl-c">#zip은 압축의 종류중 하나다.</span></pre></div>
+
+<p>마지막 2개 인코딩은 아무런 임포트 없이 압축이 가능하다는 점에서 좋은것같다.</p>
+
+<h2>
+<a id="import-unicodedata" class="anchor" href="#import-unicodedata" aria-hidden="true"><span class="octicon octicon-link"></span></a>import unicodedata</h2>
+
+<p>생략</p>
+
+<h2>
+<a id="import-stringprep" class="anchor" href="#import-stringprep" aria-hidden="true"><span class="octicon octicon-link"></span></a>import stringprep</h2>
+
+<p>생략</p>
+
+<h2>
+<a id="import-fpformat" class="anchor" href="#import-fpformat" aria-hidden="true"><span class="octicon octicon-link"></span></a>import fpformat</h2>
+
+<p>생략, python3에서 사라짐..</p>
+
+<h2>
+<a id="import-datetime" class="anchor" href="#import-datetime" aria-hidden="true"><span class="octicon octicon-link"></span></a>import datetime</h2>
+
+<p>날자 관련 모듈. 요일구하거나 날자계산할때 겁나편하다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> datetime
+d<span class="pl-k">=</span>datetime.date(<span class="pl-c1">2014</span>,<span class="pl-c1">12</span>,<span class="pl-c1">31</span>)
+<span class="pl-k">print</span> d.weekday()<span class="pl-c">#월:0 ~ 일:6</span>
+oneday<span class="pl-k">=</span>datetime.timedelta(<span class="pl-vpf">days</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
+before_one_hundred_day<span class="pl-k">=</span>d<span class="pl-k">-</span>oneday<span class="pl-k">*</span><span class="pl-c1">100</span>
+<span class="pl-k">print</span> before_one_hundred_day.strftime(<span class="pl-s1"><span class="pl-pds">'</span><span class="pl-c1">%y</span>.<span class="pl-c1">%m</span>.<span class="pl-c1">%d</span><span class="pl-pds">'</span></span>)<span class="pl-c">#14.09.22</span></pre></div>
+
+<p>자세한건 <a href="https://docs.python.org/2/library/datetime.html">여기</a></p>
+
+<h2>
+<a id="import-calendar" class="anchor" href="#import-calendar" aria-hidden="true"><span class="octicon octicon-link"></span></a>import calendar</h2>
+
+<p>달력 출력하는 모듈.</p>
+
+<p>파이썬에서 달력출력할일이 뭐가있지???</p>
+
+<p>생각보다 모듈사용법이 복잡해보인다</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> calendar
+c <span class="pl-k">=</span> calendar.TextCalendar(calendar.SUNDAY)
+c.prmonth(<span class="pl-c1">2015</span>, <span class="pl-c1">1</span>)</pre></div>
+
+<p>출력은</p>
+
+<pre><code>    January 2015
+Su Mo Tu We Th Fr Sa
+             1  2  3
+ 4  5  6  7  8  9 10
+11 12 13 14 15 16 17
+18 19 20 21 22 23 24
+25 26 27 28 29 30 31
+</code></pre>
+
+<h2>
+<a id="import-collections" class="anchor" href="#import-collections" aria-hidden="true"><span class="octicon octicon-link"></span></a>import collections</h2>
+
+<p>영어 설명으로는 High-performance container datatypes 라 되어있는 모듈.</p>
+
+<p>간단하게 설명하자면 좋은 데이터타입을 모아둔 모듈이다.</p>
+
+<h3>
+<a id="counter" class="anchor" href="#counter" aria-hidden="true"><span class="octicon octicon-link"></span></a>counter</h3>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> collections
+c<span class="pl-k">=</span>collections.counter()
+<span class="pl-k">for</span> word <span class="pl-k">in</span> [<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>blue<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>green<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>blue<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>blue<span class="pl-pds">'</span></span>]:
+    cnt[word] <span class="pl-k">+=</span> <span class="pl-c1">1</span>
+<span class="pl-k">print</span> cnt <span class="pl-c"># Counter({'blue': 3, 'red': 2, 'green': 1})</span></pre></div>
+
+<h3>
+<a id="deque" class="anchor" href="#deque" aria-hidden="true"><span class="octicon octicon-link"></span></a>deque</h3>
+
+<p>나중에</p>
+
+<h3>
+<a id="ordereddict" class="anchor" href="#ordereddict" aria-hidden="true"><span class="octicon octicon-link"></span></a>OrderedDict</h3>
+
+<p>순서가 존재하는 딕셔너리</p>
+
+<h2>
+<a id="import-headq" class="anchor" href="#import-headq" aria-hidden="true"><span class="octicon octicon-link"></span></a>import headq</h2>
+
+<p>꽝, 다음기회에</p>
+
+<p>속도가 빠르다는 소리를 들어서 테스트해보니 확실히 sort보단 빠르다</p>
+
+<h2>
+<a id="import-bisect" class="anchor" href="#import-bisect" aria-hidden="true"><span class="octicon octicon-link"></span></a>import bisect</h2>
+
+<p>나중에</p>
+
+<h2>
+<a id="import-1" class="anchor" href="#import-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>import</h2>
+
+<h2>
+<a id="end" class="anchor" href="#end" aria-hidden="true"><span class="octicon octicon-link"></span></a>end</h2>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Python-study maintained by <a href="https://github.com/anch0vy">anch0vy</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
