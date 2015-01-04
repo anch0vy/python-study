@@ -40,7 +40,7 @@
 
 <p>python 2를 기준으로 설명하고, 어느정도 파이썬에 대해 지식이 있는 사람을 대상으로 해요.</p>
 
-<p>전부 설명하는건 아니고 쓸만한것이고 누군가는 모를 수 있는것만 설명해요.</p>
+<p>전부 설명하는건 아니고 그냥 제가 보기에 쓸만한것만 설명합니다.</p>
 
 <p>("꽝, 다음기회에" 라 써져있는부분은 아직 작성하지 않은 부분입니다)</p>
 
@@ -624,10 +624,17 @@ l<span class="pl-k">=</span><span class="pl-s3">zip</span>(l1,l2)<span class="pl
 
 <p>캬</p>
 
+<p>방금 <a href="http://soooprmx.com/wp/archives/4940">어디</a>선가 이방법은 메모리에 한번에 올린다고 써놨다.</p>
+
+<p>테스트가 필요할</p>
+
+<h1>
+<a id="문자열-관련-모듈들" class="anchor" href="#%EB%AC%B8%EC%9E%90%EC%97%B4-%EA%B4%80%EB%A0%A8-%EB%AA%A8%EB%93%88%EB%93%A4" aria-hidden="true"><span class="octicon octicon-link"></span></a>문자열 관련 모듈들</h1>
+
 <h2>
 <a id="import-string" class="anchor" href="#import-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>import string</h2>
 
-<p>꽝, 다음기회에</p>
+<p>나중에</p>
 
 <h2>
 <a id="import-re" class="anchor" href="#import-re" aria-hidden="true"><span class="octicon octicon-link"></span></a>import re</h2>
@@ -727,6 +734,9 @@ ret.write(<span class="pl-s1"><span class="pl-pds">'</span>&lt;div&gt;블라블�
 
 <p>생략, python3에서 사라짐..</p>
 
+<h1>
+<a id="데이터-타입-관련-모듈들" class="anchor" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85-%EA%B4%80%EB%A0%A8-%EB%AA%A8%EB%93%88%EB%93%A4" aria-hidden="true"><span class="octicon octicon-link"></span></a>데이터 타입 관련 모듈들</h1>
+
 <h2>
 <a id="import-datetime" class="anchor" href="#import-datetime" aria-hidden="true"><span class="octicon octicon-link"></span></a>import datetime</h2>
 
@@ -804,7 +814,365 @@ c<span class="pl-k">=</span>collections.counter()
 <p>나중에</p>
 
 <h2>
-<a id="import-1" class="anchor" href="#import-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>import</h2>
+<a id="import-array" class="anchor" href="#import-array" aria-hidden="true"><span class="octicon octicon-link"></span></a>import array</h2>
+
+<p>Efficient arrays of numeric values</p>
+
+<p>list랑 어떻게 틀린지 아직 모르겠다</p>
+
+<h2>
+<a id="import-sched" class="anchor" href="#import-sched" aria-hidden="true"><span class="octicon octicon-link"></span></a>import sched</h2>
+
+<p>간단한 스케쥴관련 모듈인데 별로인듯</p>
+
+<h2>
+<a id="import-queue" class="anchor" href="#import-queue" aria-hidden="true"><span class="octicon octicon-link"></span></a>import Queue</h2>
+
+<p>멀티쓰레딩에서 쓰이는 그 큐에 관련된 모듈</p>
+
+<p>근데 파이썬은 멀티쓰레딩이...</p>
+
+<p>대신 멀티프로세스를 사용하자. (import multiprocessing)</p>
+
+<h2>
+<a id="import-weakref" class="anchor" href="#import-weakref" aria-hidden="true"><span class="octicon octicon-link"></span></a>import weakref</h2>
+
+<p>클래스 작성후 작성</p>
+
+<h2>
+<a id="import-userdict" class="anchor" href="#import-userdict" aria-hidden="true"><span class="octicon octicon-link"></span></a>import UserDict</h2>
+
+<p>생략</p>
+
+<h2>
+<a id="import-types" class="anchor" href="#import-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>import types</h2>
+
+<p>어떤 함수가 있는 모듈은 아니고 타입들이 모여있는 함수다.</p>
+
+<p>type검사를 할때 쓰이는걸 한번 본적이 있고, 파이썬의 CodeType을 만들기 위해 써본적이 있다.</p>
+
+<p>사실 타입검사는 꼼수를 쓰면 이모듈을 안써도 되서...</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> types
+<span class="pl-st">def</span> <span class="pl-en">test</span>(<span class="pl-vpf">v</span>):
+    <span class="pl-k">if</span> <span class="pl-s3">type</span>(v)<span class="pl-k">==</span>types.TupleType:
+        <span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>tuple!<span class="pl-pds">'</span></span>
+    <span class="pl-c">#또는(꼼수)</span>
+    <span class="pl-k">elif</span> <span class="pl-s3">type</span>(v)<span class="pl-k">==</span><span class="pl-s3">type</span>([]):
+        <span class="pl-k">print</span> <span class="pl-s1"><span class="pl-pds">'</span>list!<span class="pl-pds">'</span></span></pre></div>
+
+<p>참고로 types에 있는 타입들은 클래스라서 이걸로 원래는 만들지 못하는 타입의 것들을 만들수 있다.(보통 쓰이는 용도는 아님)</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> types
+c<span class="pl-k">=</span>types.CodeType(.......)</pre></div>
+
+<p>참고로 저 CodeType의 인자는 12개다.</p>
+
+<h2>
+<a id="import-copy" class="anchor" href="#import-copy" aria-hidden="true"><span class="octicon octicon-link"></span></a>import copy</h2>
+
+<p>말 그대로 카피를 위한 모듈.</p>
+
+<p>다음 예를 보면 어떻게 쓰이는지 알 수 있다.</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> copy
+a<span class="pl-k">=</span>[[<span class="pl-c1">1</span>,<span class="pl-c1">2</span>,<span class="pl-c1">3</span>],<span class="pl-c1">4</span>,<span class="pl-c1">5</span>,<span class="pl-c1">6</span>]
+b<span class="pl-k">=</span>a <span class="pl-c">#a와 b는 id가 같음</span>
+b[<span class="pl-c1">1</span>]<span class="pl-k">+=</span><span class="pl-c1">1</span>
+<span class="pl-k">print</span> a<span class="pl-c">#[[1, 2, 3], 5, 5, 6]</span>
+<span class="pl-k">print</span> b<span class="pl-c">#[[1, 2, 3], 5, 5, 6]</span>
+
+b<span class="pl-k">=</span>copy.copy(a)<span class="pl-c">#a와 b는 id가 다름. 그리고 a[0]과 b[0]의 id는 같음</span>
+b[<span class="pl-c1">1</span>]<span class="pl-k">+=</span><span class="pl-c1">1</span>
+b[<span class="pl-c1">0</span>][<span class="pl-c1">1</span>]<span class="pl-k">+=</span><span class="pl-c1">1</span>
+<span class="pl-k">print</span> a<span class="pl-c">#[[1, 3, 3], 5, 5, 6] </span>
+<span class="pl-k">print</span> b<span class="pl-c">#[[1, 3, 3], 6, 5, 6]</span>
+
+b<span class="pl-k">=</span>copy.deepcopy(a)<span class="pl-c">#a와 b는 id가 다름. 그리고 a[0]과 b[0]의 id도 다름</span>
+b[<span class="pl-c1">1</span>]<span class="pl-k">+=</span><span class="pl-c1">1</span>
+b[<span class="pl-c1">0</span>][<span class="pl-c1">1</span>]<span class="pl-k">+=</span><span class="pl-c1">1</span>
+<span class="pl-k">print</span> a<span class="pl-c">#[[1, 3, 3], 5, 5, 6]</span>
+<span class="pl-k">print</span> b<span class="pl-c">#[[1, 4, 3], 6, 5, 6]</span></pre></div>
+
+<p>그냥 잘 모르겠으면 deepcopy쓰자</p>
+
+<h2>
+<a id="import-pprint" class="anchor" href="#import-pprint" aria-hidden="true"><span class="octicon octicon-link"></span></a>import pprint</h2>
+
+<p>개발할때 2차원 리스트 출력용으로 편하다.</p>
+
+<p>pprint.pprint(object, stream=None, indent=1, width=80, depth=None)</p>
+
+<p>이런식의 함수인데 대부분의 경우 그냥 출력할거 하나만 인자로 넘겨줘도 이쁘게 출력되고, 만약 가로로 짧고 길게 출력이 된다면 width의 값을 적당하게 조절하면된다.(300이라든가 500이라든가)</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> pprint <span class="pl-k">import</span> pprint
+a<span class="pl-k">=</span>[[<span class="pl-c1">0</span> <span class="pl-k">for</span> x <span class="pl-k">in</span> <span class="pl-s3">range</span>(<span class="pl-c1">10</span>)] <span class="pl-k">for</span> x <span class="pl-k">in</span> <span class="pl-s3">range</span>(<span class="pl-c1">10</span>)]
+<span class="pl-k">print</span> a
+pprint(a)</pre></div>
+
+<p>print는</p>
+
+<pre><code>[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+</code></pre>
+
+<p>이렇게 뜨지만, pprint 는</p>
+
+<pre><code>[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+</code></pre>
+
+<p>겁나 이쁘게 뜬다.</p>
+
+<h1>
+<a id="수학관련-모듈들" class="anchor" href="#%EC%88%98%ED%95%99%EA%B4%80%EB%A0%A8-%EB%AA%A8%EB%93%88%EB%93%A4" aria-hidden="true"><span class="octicon octicon-link"></span></a>수학관련 모듈들</h1>
+
+<h2>
+<a id="import-math" class="anchor" href="#import-math" aria-hidden="true"><span class="octicon octicon-link"></span></a>import math</h2>
+
+<p>수학과 관련된 모듈. 특이하게 이건 built-in으로 임포트된다. 설명에도 이 모듈은 항상 사용가능하다고 되어있다.</p>
+
+<p>이건 설명의 필요성을 딱히 못느껴서 생략</p>
+
+<h2>
+<a id="import-cmath" class="anchor" href="#import-cmath" aria-hidden="true"><span class="octicon octicon-link"></span></a>import cmath</h2>
+
+<p>c로 짜여져있어서 cmath가 아니라 complex의 cmath다.</p>
+
+<p>이것역시 설명의 필요성을 딱히 못느껴서 생략</p>
+
+<h2>
+<a id="from-decimal-import-" class="anchor" href="#from-decimal-import-" aria-hidden="true"><span class="octicon octicon-link"></span></a>from decimal import *</h2>
+
+<p>좀더 정확한 부동소수점 사용을 위한 모듈</p>
+
+<p>특이하게 파이썬사이트에도 from decimal import * 로 나와있다.</p>
+
+<p>이건 너무 수학적인거라 간단한것만 소개하고 생략</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> decimal <span class="pl-k">import</span> \<span class="pl-ii">*</span>
+getcontext().prec <span class="pl-k">=</span> <span class="pl-c1">28</span> <span class="pl-c">#정확도를 소수점28자리까지</span>
+<span class="pl-k">print</span> Decimal(<span class="pl-c1">1</span>)<span class="pl-k">/</span>Decimal(<span class="pl-s1"><span class="pl-pds">'</span>7<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>주의할점은 Decimal(v)의 v부분에 int,float,string 이 들어갈수 있지만 float의 경우 오차가 발생해서 들어간다는 점이다.</p>
+
+<pre><code>Decimal(1.1)#Decimal('1.100000000000000088817841970012523233890533447265625')
+Decimal('1.1')#Decimal('1.1')
+</code></pre>
+
+<p><a href="https://docs.python.org/2/library/decimal.html">여길</a> 참고하자.</p>
+
+<h2>
+<a id="import-random" class="anchor" href="#import-random" aria-hidden="true"><span class="octicon octicon-link"></span></a>import random</h2>
+
+<p>랜덤과 관련된 함수.</p>
+
+<p>선언하는 순간 os.urandom이나 현재 시각을 seed로 한번 초기화를 하니, 따로 random.seed로 초기화해줄 필요는 없다.</p>
+
+<p>알아두어야 할 점은, 이 랜덤모듈은 진짜 랜덤하지 않다는 것과, 순서가 정해져 있다는것이다.</p>
+
+<div class="highlight highlight-python"><pre>random.seed(<span class="pl-c1">1</span>)
+random.random()<span class="pl-c">#0.13436424411240122</span>
+random.random()<span class="pl-c">#0.8474337369372327</span>
+random.random()<span class="pl-c">#0.763774618976614</span>
+random.seed(<span class="pl-c1">1</span>)
+random.random()<span class="pl-c">#0.13436424411240122</span>
+random.random()<span class="pl-c">#0.8474337369372327</span>
+random.random()<span class="pl-c">#0.763774618976614</span></pre></div>
+
+<p>이걸 피하고싶으면 os.urandom을 의사난수로 사용하는 랜덤클래스를 만들어서 쓰면된다</p>
+
+<div class="highlight highlight-python"><pre>secure_random<span class="pl-k">=</span>random.SystemRandom()</pre></div>
+
+<ul>
+<li>
+<p>random.randrange(start,stop[,step])</p>
+
+<p>=random.choice(range(start,stop[,step])</p>
+</li>
+<li>
+<p>random.randint(x,y)</p>
+
+<p>x이상 y이하의 랜덤한 정수 리턴</p>
+</li>
+<li>
+<p>random.choice(seq)</p>
+
+<p>seq에서 랜덤한 하나 뽑음</p>
+</li>
+<li>
+<p>random.shuffle(x)</p>
+
+<p>x를 섞는다. 리턴값이 없는게 특징(리스트를 넘기고 print해보면 섞여있음)</p>
+</li>
+<li>
+<p>random.sample(x,k)</p>
+
+<p>x에서 k개를 랜덤하게 뽑아 리스트로 리턴</p>
+</li>
+<li>
+<p>random.random()</p>
+
+<p>0이상 1미만의 랜덤한 float형을 리턴</p>
+</li>
+<li>
+<p>random.getstate()</p>
+
+<p>현재 난수생성기의 상태를 출력한다. setstate의 인자로 쓰임. </p>
+</li>
+<li>
+<p>random.setstate(state)</p>
+
+<p>state로 현재 난수생성기의 상태를 설정한다. getstate()와 함께 버그재현 디버깅용으로 좋을듯</p>
+</li>
+<li>
+<p>random.seed([x])</p>
+
+<p>시드 설정. 인자를 주지 않으면 os.urandom이나 현재 시각을 seed로 사용한다. </p>
+
+<p>어차피 모듈로드시 호출되는데, 디버깅용아니면 호출하지 말자.</p>
+</li>
+</ul>
+
+<p>그외에 많은것들은 <a href="https://docs.python.org/2/library/random.html">여길</a> 참고.</p>
+
+<h2>
+<a id="import-itertools" class="anchor" href="#import-itertools" aria-hidden="true"><span class="octicon octicon-link"></span></a>import itertools</h2>
+
+<p>이해하는중</p>
+
+<h1>
+<a id="파일관련-모듈" class="anchor" href="#%ED%8C%8C%EC%9D%BC%EA%B4%80%EB%A0%A8-%EB%AA%A8%EB%93%88" aria-hidden="true"><span class="octicon octicon-link"></span></a>파일관련 모듈</h1>
+
+<h2>
+<a id="import-ospath" class="anchor" href="#import-ospath" aria-hidden="true"><span class="octicon octicon-link"></span></a>import os.path</h2>
+
+<p>파일관련 모듈</p>
+
+<p>OS쪽에서 해주는게 많음</p>
+
+<ul>
+<li>
+<p>os.path.exists(path)</p>
+
+<p>파일이나 폴더가 존제하는지 체크</p>
+</li>
+<li>
+<p>os.path.getsize(path)</p>
+
+<p>파일크기 리턴. 없으면 에러</p>
+</li>
+<li>
+<p>os.path.join(path,*paths)</p>
+
+<p>여러개의 폴더명들을 합쳐준다.</p>
+
+<div class="highlight highlight-python"><pre>os.path.join(<span class="pl-s1"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>,<span class="pl-s1"><span class="pl-pds">'</span>2<span class="pl-pds">'</span></span>)<span class="pl-c">#'1\\2'</span></pre></div>
+
+<p>리눅스에선 / 윈도우에선 \ 로 알아서 넣어주기 때문에 호환성을 생각한다면 이 함수를 쓰는게 좋다.</p>
+</li>
+<li>
+<p>os.path.normpath(path)</p>
+
+<p>이함수는 path를 받아서 normalize해준다. 대충 이런식</p>
+
+<div class="highlight highlight-python"><pre>os.path.normpath(<span class="pl-s1"><span class="pl-pds">'</span>test/./test2<span class="pl-pds">'</span></span>)<span class="pl-c">#test/test2</span>
+os.path.normpath(<span class="pl-s1"><span class="pl-pds">'</span>test/foo/../test2<span class="pl-pds">'</span></span>)<span class="pl-c">#test/test2</span></pre></div>
+
+<p>신기해서 언급하긴 했는데... 보안상 매우 안좋은 함수인듯</p>
+</li>
+</ul>
+
+<h2>
+<a id="import-fileinput" class="anchor" href="#import-fileinput" aria-hidden="true"><span class="octicon octicon-link"></span></a>import fileinput</h2>
+
+<p>어떻게 쓰는건지를 모르겠다</p>
+
+<h2>
+<a id="import-tempfile" class="anchor" href="#import-tempfile" aria-hidden="true"><span class="octicon octicon-link"></span></a>import tempfile</h2>
+
+<ul>
+<li>
+<p>tempfile.mktemp()</p>
+
+<p>보안상의 이유로 <strong>쓰지 말자</strong></p>
+
+<p>tempfile.mkstemp를 쓰자</p>
+</li>
+<li>
+<p>tempfile.mkstemp([suffix=''[, prefix='tmp'[, dir=None[, text=False]]]])</p>
+
+<p>안전한 tmp파일 만드는 함수이다. 설명에 의하면 가장 안전하다고 한다. 레이스 컨디션도 막아주는 모양</p>
+
+<p>리턴값이 특이한데 (파일 디스크립터 넘버,tmp파일 경로) 이렇게 리턴한다.</p>
+
+<p>구글링해봐도 다들 조금씩 사용법이 틀린데 내 맘에든것은 이것</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> os,tempfile
+fd,path<span class="pl-k">=</span>tempfile.mkstemp()
+os.write(fd,<span class="pl-s1"><span class="pl-pds">'</span>something<span class="pl-pds">'</span></span>)
+os.close(fd)
+os.remove(path)</pre></div>
+
+<p>또는</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> os,tempfile
+fd,path<span class="pl-k">=</span>tempfile.mkstemp()
+f<span class="pl-k">=</span>os.fdopen(fd,<span class="pl-s1"><span class="pl-pds">'</span>w<span class="pl-pds">'</span></span>)
+f.write(<span class="pl-s1"><span class="pl-pds">'</span>something<span class="pl-pds">'</span></span>)
+f.close
+os.remove(path)</pre></div>
+
+<p>그냥 tempfile.TemporaryFile 쓰는게 속편할것같다.</p>
+</li>
+<li>
+<p>tempfile.TemporaryFile([mode='w+b'[, bufsize=-1[, suffix=''[, prefix='tmp'[, dir=None]]]]])</p>
+
+<p>파일처럼 쓸 수 있는 객체를 리턴한다.</p>
+
+<p>옵션도 있을꺼 다있고 그냥 이거쓰면 될듯</p>
+
+<div class="highlight highlight-python"><pre>f<span class="pl-k">=</span>tempfile.TemporaryFile()
+f.write(<span class="pl-s1"><span class="pl-pds">'</span>adsf<span class="pl-pds">'</span></span>)
+f.close()<span class="pl-c">#이순간 파일 삭제</span></pre></div>
+
+<p>찾아보니 이함수가 내부적으로 mkstemp()쓴다고 한다.</p>
+</li>
+</ul>
+
+<h2>
+<a id="import-glob" class="anchor" href="#import-glob" aria-hidden="true"><span class="octicon octicon-link"></span></a>import glob</h2>
+
+<p>파일리스트 얻는데에는 이 모듈보다 좋은게 없다. 예제를 보자</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> glob
+<span class="pl-k">print</span> glob.glob(<span class="pl-s1"><span class="pl-pds">'</span>*.exe<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>하면 ['file1.exe','file2.exe']이런식으로 리스트를 리턴한다.</p>
+
+<p>참고로 * 말고도 왠만한 정규식은 되는 모양.</p>
+
+<p>glob대신 iglob로 호출하면 리스트대신 iterator를 리턴함</p>
+
+<h2>
+<a id="import-shutil" class="anchor" href="#import-shutil" aria-hidden="true"><span class="octicon octicon-link"></span></a>import shutil</h2>
+
+<p>파일관련 고수준(high-level) 함수를 제공하는 모듈이다. 압축도 해줌.</p>
+
+<p>쓰기귀찮으니 다음기회에</p>
+
+<h1>
+<a id="데이터-관련-모듈" class="anchor" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A0%A8-%EB%AA%A8%EB%93%88" aria-hidden="true"><span class="octicon octicon-link"></span></a>데이터 관련 모듈</h1>
+
+<h2>
+<a id="import-pickle" class="anchor" href="#import-pickle" aria-hidden="true"><span class="octicon octicon-link"></span></a>import pickle</h2>
 
 <h2>
 <a id="end" class="anchor" href="#end" aria-hidden="true"><span class="octicon octicon-link"></span></a>end</h2>
